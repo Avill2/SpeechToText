@@ -14,13 +14,12 @@ import kotlin.math.log
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     var tts:TextToSpeech?=null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         button_speak.isEnabled=false
-        button_speak.setOnClickListener{speackOut()}
+        button_speak.setOnClickListener{speakOut()}
         tts=  TextToSpeech(this,this)
     }
 
@@ -37,15 +36,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             Log.e("TTS", "La iniciacion falló")
         }
     }
-
-
-    private fun speackOut() {
+    private fun speakOut() {
        val texto = txt_input.toString()
         tts!!.speak(texto, TextToSpeech.QUEUE_FLUSH, null,"")
     }
-
-
-
     override fun onDestroy() {
         if (tts != null){
             tts!!.stop()
